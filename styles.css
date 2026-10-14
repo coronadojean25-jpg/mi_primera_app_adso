@@ -1,13 +1,13 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f0f4f8;
+    background: #1c4874;
     text-align: center;
     padding: 50px;
 }
-h1 { color: #2563eb; }
+h1 { color: #990606; }
 button {
     padding: 12px 20px;
-    background: #2563eb;
+    background: #690450;
     color: white;
     border: none;
     border-radius: 8px;
