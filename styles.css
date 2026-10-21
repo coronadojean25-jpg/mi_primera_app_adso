@@ -1,79 +1,650 @@
 
+/* =========================================
+   1. CONFIGURACION GENERAL
+========================================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #1e1b4b, #6d28d9);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+html {
+    scroll-behavior: smooth;
 }
 
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #f5f3ff;
+    min-height: 100vh;
+    padding: 55px 20px;
+
+    background-color: #090616;
+    background-image:
+        radial-gradient(ellipse at 15% 15%, rgba(124, 58, 237, 0.25), transparent 40%),
+        radial-gradient(ellipse at 85% 80%, rgba(91, 33, 182, 0.25), transparent 40%),
+        radial-gradient(ellipse at 50% 50%, #17102f, #090616 75%);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* =========================================
+   2. LUCES DECORATIVAS DEL FONDO
+========================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    top: -100px;
+    left: -100px;
+
+    background: #7c3aed;
+    filter: blur(150px);
+    opacity: 0.18;
+    border-radius: 50%;
+
+    pointer-events: none;
+    animation: luzFlotante 9s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    right: -100px;
+    bottom: -80px;
+
+    background: #a855f7;
+    filter: blur(140px);
+    opacity: 0.15;
+    border-radius: 50%;
+
+    pointer-events: none;
+    animation: luzFlotante 11s ease-in-out infinite alternate-reverse;
+    z-index: 0;
+}
+
+@keyframes luzFlotante {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+
+    to {
+        transform: translate(45px, 35px) scale(1.2);
+    }
+}
+
+/* =========================================
+   3. TARJETA PRINCIPAL
+========================================= */
+
 .tarjeta {
-    background-color: #ffffff;
+    position: relative;
+    z-index: 1;
+
     width: 100%;
-    max-width: 450px;
-    padding: 35px;
-    border-radius: 20px;
-    border: 2px solid #c4b5fd;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 490px;
+    padding: 42px 35px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(30, 22, 55, 0.97),
+        rgba(15, 11, 31, 0.98)
+    );
+
+    border: 1px solid rgba(167, 139, 250, 0.45);
+    border-radius: 26px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.55),
+        0 0 35px rgba(124, 58, 237, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    animation: tarjetaEntrada 0.9s ease both;
+
+    transition:
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+/* brillo superior de la tarjeta */
+
+.tarjeta::before {
+    content: "";
+    position: absolute;
+
+    top: -1px;
+    left: 15%;
+    width: 70%;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #a78bfa,
+        #e9d5ff,
+        #a78bfa,
+        transparent
+    );
+
+    box-shadow: 0 0 15px #8b5cf6;
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.tarjeta:hover {
+    border-color: rgba(167, 139, 250, 0.8);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.65),
+        0 0 45px rgba(124, 58, 237, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+@keyframes tarjetaEntrada {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =========================================
+   4. TITULO PRINCIPAL
+========================================= */
+
+h1 {
+    display: inline-block;
+
+    font-size: clamp(28px, 6vw, 37px);
+    font-weight: 800;
+    letter-spacing: -1px;
+
+    margin-bottom: 22px;
+
+    background: linear-gradient(
+        110deg,
+        #ffffff 10%,
+        #ddd6fe 40%,
+        #c084fc 70%,
+        #a78bfa 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    filter: drop-shadow(0 0 15px rgba(167, 139, 250, 0.2));
+
+    animation: tituloEntrada 1s ease both;
+}
+
+@keyframes tituloEntrada {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   5. PRESENTACION PERSONAL
+========================================= */
+
+.presentacion {
+    color: #c4bdd9;
+    font-size: 15px;
+    line-height: 1.9;
+
+    margin-bottom: 32px;
+    padding: 0 3px;
+
     text-align: center;
 }
 
-h1 {
-    color: #6d28d9;
-    margin-bottom: 20px;
-    font-size: 30px;
-}
-
-.presentacion {
-    color: #444444;
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
+/* =========================================
+   6. TITULOS SECUNDARIOS
+========================================= */
 
 h2 {
-    color: #4c1d95;
+    color: #e9ddff;
     font-size: 20px;
-    margin-bottom: 15px;
+    font-weight: 700;
+
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+
+    position: relative;
+
+    border-bottom: 1px solid rgba(167, 139, 250, 0.18);
 }
 
+h2::after {
+    content: "";
+
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 75px;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #a78bfa,
+        #e9d5ff,
+        #a78bfa,
+        transparent
+    );
+
+    box-shadow: 0 0 10px rgba(167, 139, 250, 0.6);
+}
+
+/* =========================================
+   7. HABILIDADES E INTERESES
+========================================= */
+
 ul {
-    list-style-position: inside;
+    list-style: none;
     text-align: left;
-    margin-bottom: 25px;
-    color: #333333;
+    margin-bottom: 35px;
 }
 
 li {
+    position: relative;
+
+    color: #e2dcef;
+    font-size: 14px;
+    line-height: 1.6;
+
+    background: linear-gradient(
+        110deg,
+        rgba(124, 58, 237, 0.13),
+        rgba(30, 22, 55, 0.7)
+    );
+
+    border: 1px solid rgba(167, 139, 250, 0.18);
+    border-left: 3px solid #8b5cf6;
+
+    border-radius: 12px;
+
+    padding: 15px 15px 15px 44px;
     margin-bottom: 12px;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
-button {
-    background-color: #6d28d9;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 10px;
-    font-size: 16px;
+/* simbolo decorativo */
+
+li::before {
+    content: "✦";
+
+    position: absolute;
+    left: 16px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 18px;
+    color: #c084fc;
+
+    text-shadow: 0 0 12px rgba(192, 132, 252, 0.7);
+}
+
+li:hover {
+    transform: translateX(6px);
+
+    border-color: rgba(192, 132, 252, 0.6);
+    border-left-color: #d8b4fe;
+
+    background: linear-gradient(
+        110deg,
+        rgba(124, 58, 237, 0.25),
+        rgba(49, 32, 79, 0.8)
+    );
+
+    box-shadow: 0 5px 25px rgba(124, 58, 237, 0.12);
+}
+
+/* =========================================
+   8. FORMULARIO DE CONTACTO
+========================================= */
+
+.contacto {
+    color: #c4bdd9;
+    line-height: 1.8;
+
+    margin-top: 8px;
+    margin-bottom: 25px;
+}
+
+.contacto p {
+    font-size: 14px;
+    color: #a9a0c2;
+
+    margin-top: 8px;
+}
+
+/* espacios entre los campos */
+
+.campo {
+    text-align: left;
+    margin-bottom: 21px;
+}
+
+/* etiquetas */
+
+.campo label {
+    display: block;
+
+    color: #ddd0ff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+
+    margin-bottom: 9px;
+}
+
+/* campos de entrada */
+
+.campo input,
+.campo select,
+.campo textarea {
+    display: block;
+    width: 100%;
+
+    padding: 14px 15px;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    color: #f5f3ff;
+    background: rgba(9, 6, 22, 0.72);
+
+    border: 1px solid rgba(167, 139, 250, 0.25);
+    border-radius: 12px;
+
+    outline: none;
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+/* texto de ayuda */
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+    color: #817695;
+}
+
+/* lista desplegable */
+
+.campo select {
     cursor: pointer;
-    transition: 0.3s;
+}
+
+.campo select option {
+    color: #f5f3ff;
+    background-color: #1e1638;
+}
+
+/* efecto de enfoque */
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    border-color: #a78bfa;
+
+    background: rgba(24, 15, 45, 0.95);
+
+    box-shadow:
+        0 0 0 3px rgba(139, 92, 246, 0.12),
+        0 0 20px rgba(139, 92, 246, 0.08);
+
+    transform: translateY(-1px);
+}
+
+/* campo del mensaje */
+
+.campo textarea {
+    min-height: 135px;
+    resize: vertical;
+    line-height: 1.7;
+}
+
+/* =========================================
+   9. BOTONES
+========================================= */
+
+button {
+    position: relative;
+    overflow: hidden;
+
+    padding: 14px 25px;
+
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+
+    background: linear-gradient(
+        110deg,
+        #7c3aed,
+        #6d28d9,
+        #9333ea
+    );
+
+    border: 1px solid rgba(216, 180, 254, 0.35);
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 20px rgba(109, 40, 217, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* reflejo del boton */
+
+button::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.22),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+}
+
+button:hover::before {
+    left: 150%;
 }
 
 button:hover {
-    background-color: #4c1d95;
-    transform: scale(1.05);
+    transform: translateY(-3px);
+
+    border-color: rgba(233, 213, 255, 0.8);
+
+    box-shadow:
+        0 10px 30px rgba(124, 58, 237, 0.35),
+        0 0 20px rgba(139, 92, 246, 0.15);
 }
 
+button:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* boton de envio */
+
+.boton-enviar {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* =========================================
+   10. RESPUESTAS Y MENSAJES
+========================================= */
+
+#respuestaFormulario {
+    color: #d8b4fe;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.7;
+
+    margin-bottom: 20px;
+    overflow-wrap: anywhere;
+}
+
+/* mensaje personalizado */
+
 #mensaje {
-    color: #6d28d9;
-    font-weight: bold;
-    margin-top: 20px;
-    line-height: 1.5;
+    color: #e9ddff;
+
+    background: linear-gradient(
+        120deg,
+        rgba(124, 58, 237, 0.2),
+        rgba(76, 29, 149, 0.15)
+    );
+
+    border: 1px solid rgba(167, 139, 250, 0.3);
+    border-radius: 13px;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.8;
+
+    margin-top: 22px;
+    padding: 14px;
+
+    overflow-wrap: anywhere;
+
+    animation: mensajeEntrada 0.4s ease;
+}
+
+@keyframes mensajeEntrada {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   11. SELECCION DE TEXTO
+========================================= */
+
+::selection {
+    color: #ffffff;
+    background: #7c3aed;
+}
+
+/* =========================================
+   12. ADAPTACION A MOVILES
+========================================= */
+
+@media (max-width: 480px) {
+    body {
+        padding: 25px 12px;
+    }
+
+    .tarjeta {
+        padding: 30px 21px;
+        border-radius: 21px;
+    }
+
+    h1 {
+        font-size: 28px;
+        letter-spacing: -0.5px;
+    }
+
+    h2 {
+        font-size: 19px;
+    }
+
+    .presentacion {
+        font-size: 14px;
+        line-height: 1.85;
+    }
+
+    li {
+        font-size: 13px;
+        padding: 13px 12px 13px 39px;
+    }
+
+    .campo input,
+    .campo select,
+    .campo textarea {
+        font-size: 16px;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px 18px;
+    }
+}
+
+/* =========================================
+   13. ACCESIBILIDAD
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
 }
